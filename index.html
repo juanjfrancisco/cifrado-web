@@ -3,81 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CifraDO - Data Solutions</title>
-    <!-- Chart.js para las gráficas -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-    <!-- Lucide Icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.300.0/lucide.min.js"></script>
+    <meta name="description" content="CifraDO ofrece soluciones líderes en infraestructura de datos empresariales, seguridad avanzada y automatización con IA. Transformamos tus datos en ventajas competitivas.">
+    <title>CifraDO - Soluciones Avanzadas de Datos e IA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.300.0/lucide.min.js" defer></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <nav class="nav-container">
-            <div class="logo">
-                <i data-lucide="database"></i>
+            <a href="#hero" class="logo"> <i data-lucide="database"></i>
                 CifraDO
-            </div>
+            </a>
             <div class="nav-links">
                 <a href="#solutions">Soluciones</a>
                 <a href="#expertise">Expertise</a>
                 <a href="#technology">Tecnología</a>
                 <a href="#cases">Casos de Éxito</a>
+                <a href="#about">Nosotros</a>
                 <a href="#contact">Contacto</a>
             </div>
-            <button class="menu-button">
+            <button class="menu-button" aria-label="Abrir menú de navegación">
                 <i data-lucide="menu"></i>
             </button>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1>Transformando Datos en Ventajas Competitivas</h1>
-                <p>24+ años liderando soluciones de infraestructura de datos empresariales</p>
+                <h1>Transformando Datos en Ventajas Competitivas con IA</h1>
+                <p>Con más de 24 años de experiencia, lideramos la vanguardia en soluciones de infraestructura de datos empresariales, fusionando la robustez con la inteligencia artificial para potenciar tu negocio.</p>
                 <div class="button-group">
                     <a href="#solutions" class="btn btn-primary">Descubrir Soluciones</a>
                     <a href="#contact" class="btn btn-outline">Agendar Demo</a>
                 </div>
             </div>
             <div class="chart-container">
-                <canvas id="performanceChart"></canvas>
+                <canvas id="performanceChart" aria-label="Gráfico de rendimiento de CifraDO"></canvas>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="solutions">
-        <h2 class="section-title">Soluciones Innovadoras en Gestión de Datos</h2>
+    <section class="services section-padding" id="solutions">
+        <h2 class="section-title">Soluciones Innovadoras en Gestión e Inteligencia de Datos</h2>
+        <p class="section-subtitle">Optimizamos, protegemos y potenciamos tus datos para convertirlos en decisiones estratégicas.</p>
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon">
-                    <i data-lucide="database"></i>
+                    <i data-lucide="server"></i>
                 </div>
-                <h3>Infraestructura DB</h3>
-                <p>Arquitecturas escalables y de alto rendimiento</p>
+                <h3>Infraestructura de Datos Moderna</h3>
+                <p>Diseñamos y gestionamos arquitecturas de bases de datos robustas, escalables y de alto rendimiento, preparadas para el futuro.</p>
+                <a href="#contact" class="service-cta">Más Información <i data-lucide="arrow-right" class="icon-small"></i></a>
             </div>
             <div class="service-card">
                 <div class="service-icon">
-                    <i data-lucide="shield"></i>
+                    <i data-lucide="shield-check"></i>
                 </div>
-                <h3>Seguridad Avanzada</h3>
-                <p>Protección integral de datos empresariales</p>
+                <h3>Seguridad de Datos Avanzada</h3>
+                <p>Implementamos estrategias de protección integral para tus activos de datos más críticos, cumpliendo con los más altos estándares.</p>
+                 <a href="#contact" class="service-cta">Más Información <i data-lucide="arrow-right" class="icon-small"></i></a>
             </div>
             <div class="service-card">
                 <div class="service-icon">
-                    <i data-lucide="cpu"></i>
+                    <i data-lucide="brain-circuit"></i>
                 </div>
-                <h3>Automatización</h3>
-                <p>Procesos optimizados mediante IA</p>
+                <h3>Automatización Inteligente y IA</h3>
+                <p>Optimizamos tus procesos y extraemos insights valiosos mediante la aplicación de Inteligencia Artificial y Machine Learning.</p>
+                 <a href="#contact" class="service-cta">Más Información <i data-lucide="arrow-right" class="icon-small"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats">
+    <section class="stats section-padding">
         <div class="stats-grid">
             <div class="stat-item">
                 <div class="number">24+</div>
@@ -85,61 +89,197 @@
             </div>
             <div class="stat-item">
                 <div class="number">500+</div>
-                <div class="label">Proyectos Exitosos</div>
+                <div class="label">Proyectos Globales Exitosos</div>
             </div>
             <div class="stat-item">
                 <div class="number">99.9%</div>
-                <div class="label">Uptime Garantizado</div>
+                <div class="label">Uptime en Soluciones Críticas</div>
             </div>
             <div class="stat-item">
                 <div class="number">50+</div>
-                <div class="label">Empresas Fortune 500</div>
+                <div class="label">Clientes Fortune 500 Confían en Nosotros</div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2 class="section-title">Impulse su Estrategia de Datos</h2>
-        <div class="contact-form">
-            <div class="form-grid">
-                <div class="input-fields">
-                    <div class="input-group">
-                        <input type="text" placeholder="Nombre">
-                    </div>
-                    <div class="input-group">
-                        <input type="email" placeholder="Email Corporativo">
-                    </div>
-                    <div class="input-group">
-                        <input type="text" placeholder="Empresa">
-                    </div>
-                    <div class="input-group">
-                        <textarea placeholder="¿Cómo podemos ayudarte?" rows="4"></textarea>
-                    </div>
-                    <button class="btn btn-primary">Solicitar Consultoría</button>
+    <section class="expertise section-padding" id="expertise">
+        <h2 class="section-title">Nuestra Expertise a tu Servicio</h2>
+        <p class="section-subtitle">Combinamos conocimiento profundo y experiencia práctica para resolver tus desafíos de datos más complejos.</p>
+        <div class="expertise-grid">
+            <div class="expertise-item">
+                <i data-lucide="database-zap" class="expertise-icon"></i>
+                <h4>Consultoría Estratégica de Datos</h4>
+                <p>Te ayudamos a definir y ejecutar una hoja de ruta de datos alineada con tus objetivos de negocio.</p>
+            </div>
+            <div class="expertise-item">
+                <i data-lucide="scaling" class="expertise-icon"></i>
+                <h4>Optimización de Rendimiento</h4>
+                <p>Maximizamos la eficiencia de tus sistemas de bases de datos para una respuesta ágil y escalabilidad.</p>
+            </div>
+            <div class="expertise-item">
+                <i data-lucide="cloud-cog" class="expertise-icon"></i>
+                <h4>Migración y Modernización a la Nube</h4>
+                <p>Facilitamos tu transición a plataformas cloud, asegurando una migración segura y optimizada.</p>
+            </div>
+             <div class="expertise-item">
+                <i data-lucide="lock-keyhole" class="expertise-icon"></i>
+                <h4>Gobernanza y Cumplimiento Normativo</h4>
+                <p>Implementamos marcos de gobernanza de datos y te ayudamos a cumplir con regulaciones como GDPR, HIPAA, etc.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="technology section-padding" id="technology">
+        <h2 class="section-title">Tecnologías de Vanguardia</h2>
+        <p class="section-subtitle">Utilizamos un stack tecnológico avanzado para ofrecer soluciones innovadoras y eficientes.</p>
+        <div class="technology-logos">
+            <div class="tech-logo-item" title="Oracle"><i data-lucide="database"></i><span>Oracle</span></div>
+            <div class="tech-logo-item" title="Microsoft SQL Server"><i data-lucide="database"></i><span>SQL Server</span></div>
+            <div class="tech-logo-item" title="PostgreSQL"><i data-lucide="database"></i><span>PostgreSQL</span></div>
+            <div class="tech-logo-item" title="MySQL"><i data-lucide="database"></i><span>MySQL</span></div>
+            <div class="tech-logo-item" title="MongoDB"><i data-lucide="database"></i><span>MongoDB</span></div>
+            <div class="tech-logo-item" title="AWS"><i data-lucide="cloud"></i><span>AWS</span></div>
+            <div class="tech-logo-item" title="Azure"><i data-lucide="cloud"></i><span>Azure</span></div>
+            <div class="tech-logo-item" title="Google Cloud"><i data-lucide="cloud"></i><span>Google Cloud</span></div>
+            <div class="tech-logo-item" title="Python"><i data-lucide="code-2"></i><span>Python</span></div>
+            <div class="tech-logo-item" title="Apache Kafka"><i data-lucide="workflow"></i><span>Kafka</span></div>
+            <div class="tech-logo-item" title="Kubernetes"><i data-lucide="box"></i><span>Kubernetes</span></div>
+             <div class="tech-logo-item" title="TensorFlow"><i data-lucide="brain"></i><span>TensorFlow</span></div>
+        </div>
+    </section>
+
+    <section class="cases section-padding" id="cases">
+        <h2 class="section-title">Casos de Éxito que Inspiran</h2>
+        <p class="section-subtitle">Descubre cómo hemos ayudado a empresas como la tuya a alcanzar sus metas.</p>
+        <div class="cases-grid">
+            <div class="case-card">
+                <img src="https://placehold.co/600x400/0f172a/e2e8f0?text=Caso+de+Éxito+1" alt="Imagen descriptiva del Caso de Éxito 1" class="case-image">
+                <div class="case-content">
+                    <h4>Optimización de Infraestructura para Retail Global</h4>
+                    <p>Redujimos los costos operativos en un 30% y mejoramos el tiempo de respuesta de las consultas en un 50% para una cadena de retail líder.</p>
+                    <a href="#contact" class="btn btn-outline btn-small">Leer Más</a>
                 </div>
-                <div class="features-list">
+            </div>
+            <div class="case-card">
+                 <img src="https://placehold.co/600x400/1e3a8a/e2e8f0?text=Caso+de+Éxito+2" alt="Imagen descriptiva del Caso de Éxito 2" class="case-image">
+                <div class="case-content">
+                    <h4>Implementación de IA para Sector Financiero</h4>
+                    <p>Desarrollamos un sistema de detección de fraude basado en IA que incrementó la precisión en un 25%, ahorrando millones.</p>
+                    <a href="#contact" class="btn btn-outline btn-small">Leer Más</a>
+                </div>
+            </div>
+            <div class="case-card">
+                <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Caso+de+Éxito+3" alt="Imagen descriptiva del Caso de Éxito 3" class="case-image">
+                <div class="case-content">
+                    <h4>Plataforma de Datos Segura para Salud</h4>
+                    <p>Construimos una plataforma de datos segura y compatible con HIPAA para un proveedor de atención médica, mejorando la gestión de pacientes.</p>
+                    <a href="#contact" class="btn btn-outline btn-small">Leer Más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about section-padding" id="about">
+        <h2 class="section-title">Conoce a CifraDO</h2>
+        <div class="about-container">
+            <div class="about-image-container">
+                 <img src="https://placehold.co/800x600/0f172a/e2e8f0?text=Equipo+CifraDO" alt="Equipo de CifraDO trabajando en soluciones de datos" class="about-image">
+            </div>
+            <div class="about-content">
+                <h3>Nuestra Misión: Potenciar tu Futuro con Datos</h3>
+                <p>En CifraDO, creemos que los datos son el activo más valioso de una organización. Desde nuestra fundación hace más de dos décadas, nos hemos dedicado a ayudar a empresas de todos los tamaños a desbloquear el poder de sus datos, transformándolos en conocimiento accionable y ventajas competitivas sostenibles.</p>
+                <p>Nuestro equipo está compuesto por expertos apasionados por la tecnología y la innovación, comprometidos con la excelencia y la entrega de resultados medibles. Nos enorgullece construir relaciones a largo plazo con nuestros clientes, basadas en la confianza y el éxito mutuo.</p>
+                <ul class="about-values">
+                    <li><i data-lucide="lightbulb"></i> Innovación Constante</li>
+                    <li><i data-lucide="users"></i> Enfoque en el Cliente</li>
+                    <li><i data-lucide="shield-check"></i> Integridad y Transparencia</li>
+                    <li><i data-lucide="trending-up"></i> Excelencia en la Entrega</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact section-padding" id="contact">
+        <h2 class="section-title">Impulsa tu Estrategia de Datos Hoy Mismo</h2>
+        <p class="section-subtitle">Contáctanos para una consultoría gratuita y descubre cómo podemos ayudarte.</p>
+        <div class="contact-form-container">
+            <form class="contact-form-fields">
+                <div class="input-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre Completo" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email Corporativo</label>
+                    <input type="email" id="email" name="email" placeholder="tu@emailcorporativo.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="empresa">Empresa</label>
+                    <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu Empresa">
+                </div>
+                 <div class="input-group">
+                    <label for="telefono">Teléfono (Opcional)</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="+1 (555) 123-4567">
+                </div>
+                <div class="input-group">
+                    <label for="mensaje">¿Cómo podemos ayudarte?</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Describe brevemente tu necesidad o consulta..." rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-submit">Solicitar Consultoría</button>
+            </form>
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <p><i data-lucide="map-pin"></i> Av. Principal 123, Ciudad Capital</p>
+                <p><i data-lucide="phone"></i> +1 (800) 555-CIFRA</p>
+                <p><i data-lucide="mail"></i> info@cifrado.com</p>
+                <h4>Síguenos</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn de CifraDO"><i data-lucide="linkedin"></i></a>
+                    <a href="#" aria-label="Twitter de CifraDO"><i data-lucide="twitter"></i></a>
+                    </div>
+                 <div class="features-list">
                     <div class="feature-item">
                         <i data-lucide="globe"></i>
-                        <span>Oficinas Globales</span>
+                        <span>Oficinas Globales y Soporte Multilingüe</span>
                     </div>
                     <div class="feature-item">
-                        <i data-lucide="shield"></i>
-                        <span>ISO 27001 Certificado</span>
+                        <i data-lucide="shield-half"></i>
+                        <span>Certificación ISO 27001 en Seguridad</span>
                     </div>
                     <div class="feature-item">
-                        <i data-lucide="bar-chart"></i>
-                        <span>Analytics en Tiempo Real</span>
+                        <i data-lucide="bar-chart-big"></i>
+                        <span>Capacidades Avanzadas de Analytics en Tiempo Real</span>
                     </div>
                     <div class="feature-item">
-                        <i data-lucide="git-branch"></i>
-                        <span>Soluciones Personalizadas</span>
+                        <i data-lucide="git-fork"></i>
+                        <span>Desarrollo de Soluciones de Datos a Medida</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <script src="js/main.js"></script>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <i data-lucide="database"></i> CifraDO
+            </div>
+            <div class="footer-links">
+                <a href="#solutions">Soluciones</a>
+                <a href="#expertise">Expertise</a>
+                <a href="#cases">Casos de Éxito</a>
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Términos de Servicio</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; <span id="currentYear"></span> CifraDO. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
 </body>
 </html>
