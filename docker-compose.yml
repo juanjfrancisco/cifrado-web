@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: cifrado-web
+    build: .
+    ports:
+      - "8069:8069"
+    restart: unless-stopped
