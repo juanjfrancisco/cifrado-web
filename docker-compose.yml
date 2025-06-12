@@ -6,4 +6,12 @@ services:
     build: .
     ports:
       - "8069:8069"
+    volumes:
+      - ./data:/var/www/html/data
+    environment:
+      - TZ=UTC
     restart: unless-stopped
+    user: "0:0"  # Ejecutar como root para poder cambiar permisos
+    
+volumes:
+  data:

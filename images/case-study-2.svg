@@ -1,0 +1,27 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg2)"/>
+  <g transform="translate(200,120)">
+    <rect x="0" y="0" width="200" height="160" fill="none" stroke="#e2e8f0" stroke-width="3" rx="10"/>
+    <circle cx="100" cy="60" r="30" fill="#60a5fa" opacity="0.7"/>
+    <path d="M70,60 Q100,30 130,60 Q100,90 70,60" fill="#ffffff" opacity="0.8"/>
+    <text x="100" y="67" text-anchor="middle" fill="#0f172a" font-family="Arial, sans-serif" font-size="20" font-weight="bold">AI</text>
+  </g>
+  <text x="300" y="320" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">Sector Financiero</text>
+  <text x="300" y="350" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="16">Detección de Fraude con IA</text>
+  <g transform="translate(100,50)">
+    <rect x="0" y="0" width="40" height="40" fill="#60a5fa" opacity="0.4" rx="5"/>
+    <rect x="60" y="0" width="40" height="40" fill="#3b82f6" opacity="0.6" rx="5"/>
+    <rect x="120" y="0" width="40" height="40" fill="#60a5fa" opacity="0.4" rx="5"/>
+  </g>
+  <g transform="translate(360,50)">
+    <rect x="0" y="0" width="40" height="40" fill="#3b82f6" opacity="0.6" rx="5"/>
+    <rect x="60" y="0" width="40" height="40" fill="#60a5fa" opacity="0.4" rx="5"/>
+    <rect x="120" y="0" width="40" height="40" fill="#3b82f6" opacity="0.6" rx="5"/>
+  </g>
+</svg>
