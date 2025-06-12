@@ -6,4 +6,11 @@ services:
     build: .
     ports:
       - "8069:8069"
+    volumes:
+      - ./data:/var/www/html/data
+    environment:
+      - TZ=UTC
     restart: unless-stopped
+    
+volumes:
+  data:
