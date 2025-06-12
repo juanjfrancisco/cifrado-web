@@ -6,6 +6,7 @@ RUN apk add --no-cache \
     nginx \
     sqlite \
     sqlite-dev \
+    su-exec \
     && docker-php-ext-install pdo_sqlite
 
 # Configure PHP
@@ -41,10 +42,13 @@ RUN chown -R www-data:www-data /var/www/html \
 # Create startup script
 RUN echo '#!/bin/sh' > /start.sh \
     && echo 'echo "Iniciando servicios..."' >> /start.sh \
+    && echo 'echo "Configurando permisos..."' >> /start.sh \
+    && echo 'chown -R www-data:www-data /var/www/html/data' >> /start.sh \
+    && echo 'chmod -R 775 /var/www/html/data' >> /start.sh \
     && echo 'php-fpm &' >> /start.sh \
     && echo 'sleep 2' >> /start.sh \
     && echo 'echo "Inicializando base de datos..."' >> /start.sh \
-    && echo 'php /var/www/html/init_db.php' >> /start.sh \
+    && echo 'su-exec www-data php /var/www/html/init_db.php' >> /start.sh \
     && echo 'echo "Iniciando Nginx..."' >> /start.sh \
     && echo 'nginx -g "daemon off;"' >> /start.sh \
     && chmod +x /start.sh
