@@ -2,31 +2,59 @@
 session_start();
 
 // Configuración
-$database_file = 'data/contacts.db';
-$data_dir = 'data';
+$database_file = '/var/www/html/data/contacts.db';
+$data_dir = '/var/www/html/data';
 
 // Crear directorio de datos si no existe
 if (!is_dir($data_dir)) {
-    mkdir($data_dir, 0755, true);
+    if (!mkdir($data_dir, 0775, true)) {
+        error_log('No se pudo crear el directorio: ' . $data_dir);
+        jsonResponse('error', 'Error de configuración del servidor');
+    }
+}
+
+// Verificar permisos del directorio
+if (!is_writable($data_dir)) {
+    error_log('Directorio no escribible: ' . $data_dir);
+    jsonResponse('error', 'Error de permisos del servidor');
 }
 
 // Crear base de datos SQLite si no existe
 if (!file_exists($database_file)) {
-    $db = new SQLite3($database_file);
-    $db->exec('
-        CREATE TABLE IF NOT EXISTS contacts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL,
-            email TEXT NOT NULL,
-            empresa TEXT,
-            telefono TEXT,
-            mensaje TEXT NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            ip_address TEXT,
-            user_agent TEXT
-        )
-    ');
-    $db->close();
+    try {
+        $db = new SQLite3($database_file);
+        $sql = '
+            CREATE TABLE IF NOT EXISTS contacts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nombre TEXT NOT NULL,
+                email TEXT NOT NULL,
+                empresa TEXT,
+                telefono TEXT,
+                mensaje TEXT NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                ip_address TEXT,
+                user_agent TEXT
+            )
+        ';
+        $result = $db->exec($sql);
+        if (!$result) {
+            error_log('Error al crear tabla: ' . $db->lastErrorMsg());
+            jsonResponse('error', 'Error al inicializar la base de datos');
+        }
+        $db->close();
+        
+        // Establecer permisos del archivo
+        chmod($database_file, 0664);
+    } catch (Exception $e) {
+        error_log('Error al crear BD: ' . $e->getMessage());
+        jsonResponse('error', 'Error al crear la base de datos');
+    }
+}
+
+// Verificar que la base de datos es accesible
+if (!file_exists($database_file) || !is_readable($database_file)) {
+    error_log('Base de datos no accesible: ' . $database_file);
+    jsonResponse('error', 'Base de datos no disponible');
 }
 
 // Función para enviar respuesta JSON
@@ -96,6 +124,12 @@ $ip_address = $_SERVER['REMOTE_ADDR'];
 $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
 try {
+    // Verificar extensión SQLite3
+    if (!extension_loaded('sqlite3')) {
+        error_log('Extensión SQLite3 no cargada');
+        jsonResponse('error', 'Extensión de base de datos no disponible');
+    }
+    
     $db = new SQLite3($database_file);
     
     // Verificar envíos recientes de la misma IP (últimos 10 minutos)

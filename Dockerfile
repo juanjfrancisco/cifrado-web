@@ -14,7 +14,7 @@ RUN echo "date.timezone = UTC" > /usr/local/etc/php/conf.d/timezone.ini
 # Create necessary directories
 RUN mkdir -p /var/www/html/data \
     && chown -R www-data:www-data /var/www/html/data \
-    && chmod 755 /var/www/html/data
+    && chmod 775 /var/www/html/data
 
 # Copy application files
 COPY . /var/www/html/
@@ -35,11 +35,17 @@ RUN echo '[www]' > /usr/local/etc/php-fpm.d/www.conf \
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+    && chmod -R 755 /var/www/html \
+    && chmod 775 /var/www/html/data
 
 # Create startup script
 RUN echo '#!/bin/sh' > /start.sh \
+    && echo 'echo "Iniciando servicios..."' >> /start.sh \
     && echo 'php-fpm &' >> /start.sh \
+    && echo 'sleep 2' >> /start.sh \
+    && echo 'echo "Inicializando base de datos..."' >> /start.sh \
+    && echo 'php /var/www/html/init_db.php' >> /start.sh \
+    && echo 'echo "Iniciando Nginx..."' >> /start.sh \
     && echo 'nginx -g "daemon off;"' >> /start.sh \
     && chmod +x /start.sh
 

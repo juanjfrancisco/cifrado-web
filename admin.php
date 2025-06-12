@@ -4,7 +4,7 @@ session_start();
 // Configuración simple de autenticación
 $admin_user = 'admin';
 $admin_pass = 'cifrado2025!'; // Cambiar en producción
-$database_file = 'data/contacts.db';
+$database_file = '/var/www/html/data/contacts.db';
 
 // Verificar autenticación
 if (!isset($_SESSION['admin_logged_in'])) {
