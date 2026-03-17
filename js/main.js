@@ -211,37 +211,126 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(statsSection);
     }
 
-    // Validación del formulario (mejorada)
+    // Validación y envío del formulario con AJAX
     const form = document.querySelector('.contact-form-fields');
     if (form) {
         const inputs = form.querySelectorAll('input[required], textarea[required]');
-
+        const submitBtn = form.querySelector('.btn-submit');
+        
+        // Crear elemento para mostrar mensajes
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'form-message';
+        messageDiv.style.cssText = `
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            display: none;
+            font-weight: 500;
+        `;
+        form.insertBefore(messageDiv, submitBtn);
+        
+        // Función para mostrar mensajes
+        function showMessage(message, type) {
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            if (type === 'success') {
+                messageDiv.style.backgroundColor = '#dcfce7';
+                messageDiv.style.color = '#166534';
+                messageDiv.style.border = '1px solid #bbf7d0';
+            } else {
+                messageDiv.style.backgroundColor = '#fef2f2';
+                messageDiv.style.color = '#dc2626';
+                messageDiv.style.border = '1px solid #fecaca';
+            }
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 8000);
+        }
+        
+        // Función para validar email
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+        
         form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Validación del lado del cliente
             let isValid = true;
+            const formData = new FormData();
+            
             inputs.forEach(input => {
-                if (!input.value.trim()) {
+                const value = input.value.trim();
+                if (!value) {
                     isValid = false;
-                    input.style.borderColor = '#ef4444'; // Rojo para error
-                    // Podrías añadir un mensaje de error aquí
+                    input.style.borderColor = '#ef4444';
                 } else {
-                    input.style.borderColor = '#cbd5e1'; // Borde normal
+                    input.style.borderColor = '#cbd5e1';
+                    formData.append(input.name, value);
                 }
             });
-            if (!isValid) {
-                event.preventDefault(); // Prevenir envío si no es válido
-                // Podrías mostrar un mensaje general de error
-                alert('Por favor, completa todos los campos obligatorios.'); // Temporal, reemplazar con un mensaje en la UI
-            } else {
-                // Aquí iría la lógica de envío del formulario (AJAX, etc.)
-                // event.preventDefault(); // Descomentar si manejas el envío con AJAX
-                // alert('Formulario enviado (simulación)'); // Temporal
-                console.log('Formulario listo para enviar');
+            
+            // Validación especial para email
+            const emailInput = form.querySelector('input[type="email"]');
+            if (emailInput && emailInput.value.trim() && !isValidEmail(emailInput.value.trim())) {
+                isValid = false;
+                emailInput.style.borderColor = '#ef4444';
+                showMessage('Por favor, ingresa un email válido.', 'error');
+                return;
             }
+            
+            // Añadir campos opcionales
+            const optionalInputs = form.querySelectorAll('input:not([required]), textarea:not([required])');
+            optionalInputs.forEach(input => {
+                if (input.value.trim()) {
+                    formData.append(input.name, input.value.trim());
+                }
+            });
+            
+            if (!isValid) {
+                showMessage('Por favor, completa todos los campos obligatorios.', 'error');
+                return;
+            }
+            
+            // Mostrar estado de carga
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            
+            // Enviar formulario con AJAX
+            fetch('contact.php', {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showMessage(data.message, 'success');
+                    form.reset(); // Limpiar formulario
+                    inputs.forEach(input => {
+                        input.style.borderColor = '#cbd5e1';
+                    });
+                } else {
+                    showMessage(data.message || 'Error al enviar el mensaje.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('Error de conexión. Por favor, inténtalo nuevamente.', 'error');
+            })
+            .finally(() => {
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            });
         });
 
         inputs.forEach(input => {
             input.addEventListener('blur', function() { // Validar al perder foco
                 if (!this.value.trim() && this.hasAttribute('required')) {
+                    this.style.borderColor = '#ef4444';
+                } else if (this.type === 'email' && this.value.trim() && !isValidEmail(this.value.trim())) {
                     this.style.borderColor = '#ef4444';
                 } else {
                     this.style.borderColor = '#cbd5e1';
@@ -283,6 +372,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Scroll to top button
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.className = 'scroll-to-top';
+    scrollToTopBtn.setAttribute('aria-label', 'Volver arriba');
+    scrollToTopBtn.innerHTML = '<i data-lucide="arrow-up"></i>';
+    document.body.appendChild(scrollToTopBtn);
+
+    // Show/hide scroll to top button
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
+    });
+
+    // Scroll to top functionality
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Scroll progress indicator
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        progressBar.style.width = scrollPercent + '%';
+    });
+
+    // Navbar scroll effect
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Re-initialize Lucide icons after DOM changes
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
     }
 
 });
